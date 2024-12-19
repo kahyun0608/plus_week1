@@ -20,9 +20,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     List<Reservation> findByItemId(Long itemId);
 
-    @Query("SELECT DISTINCT new com.example.demo.dto.ReservationResponseDto(r.id, u.nickname, i.name, r.startAt, r.endAt) FROM Reservation r " +
-            "JOIN fetch r.user u " +
-            "JOIN fetch r.item i ")
+    @Query("SELECT new com.example.demo.dto.ReservationResponseDto(r.id, u.nickname, i.name, r.startAt, r.endAt) FROM Reservation r " +
+            "JOIN r.user u " +
+            "JOIN r.item i ")
     List<ReservationResponseDto> findAllDto();
 
     @Query("SELECT r FROM Reservation r " +
